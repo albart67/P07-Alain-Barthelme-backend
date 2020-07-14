@@ -1,16 +1,17 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
-
 const sequelize = require("./database");
+// const userRoutes = require('./routes/user');
+// const sauceRoutes = require('./routes/sauce');
 
 const User = require("./models/user");
 const Message = require("./models/message");
 const Comment = require("./models/comment");
 
-const messageRoutes = require("./routes/messageRoutes");
-const userRoutes = require("./routes/userRoutes");
-const commentRoutes = require("./routes/commentRoutes");
+const messageRoutes = require("./controllers/messageRoutes");
+const userRoutes = require("./controllers/userRoutes");
+const commentRoutes = require("./controllers/comment");
 
 
 app.use((req, res, next) => {
