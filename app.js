@@ -6,7 +6,12 @@ const sequelize = require("./database");
 
 const User = require("./models/user");
 const Message = require("./models/message");
-const Comment = require("./models/comment")
+const Comment = require("./models/comment");
+
+const messageRoutes = require("./routes/messageRoutes");
+const userRoutes = require("./routes/userRoutes");
+const commentRoutes = require("./routes/commentRoutes");
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,16 +22,12 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-const messageRoutes = require("./routes/messageRoutes");
+
 app.use("/api", messageRoutes);
-
-const userRoutes = require("./routes/userRoutes");
-//const { post } = require("./routes/userRoutes");
 app.use("/api", userRoutes);
-
-const commentRoutes = require("./routes/commentRoutes")
 app.use("/api", commentRoutes);
 
+//Association des models
 Message.hasMany(Comment);
 Comment.belongsTo(User);
 
@@ -47,7 +48,7 @@ async function test() {
         isAdmin: true
     });
     await Message.create({
-        title: 'test',
+
         text: 'bonjour',
         userId: 1
     })
@@ -76,6 +77,14 @@ async function test() {
 }
 
 
+
+// Message.sync({ force: true }).then(() => {
+//     // Now the `users` table in the database corresponds to the model definition
+//     return Message.create({
+//         userId: 2,
+//         text: "le chef "
+//     });
+// });
 
 
 /*
@@ -110,7 +119,7 @@ User.sync({ force: true }).then(() => {
 });
 
 
-/*
+
 Message.sync({ force: true }).then(() => {
     // Now the `users` table in the database corresponds to the model definition
     return Message.create({
@@ -118,7 +127,7 @@ Message.sync({ force: true }).then(() => {
         text: "le chef "
     });
 });
-*/
+
 app.use("/api", messageRoutes);
 
 

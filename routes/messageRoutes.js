@@ -35,8 +35,8 @@ router.get("/allMessage1", (req, res) => {
     Message.findAll({
         include: [{ model: User }]
     }).then(messages =>
-        messages.forEach((message) => //res.send(`${message.text} écrit par ${message.user.name}`)
-        { console.log(`${message.text} écrit par ${message.user.name}`) }
+        messages.forEach((message) => res.send(`${message.text} écrit par ${message.user.name}`)
+            // { console.log(`${message.text} écrit par ${message.user.name}`) }
         ))
         .catch(
             (error) => {
@@ -49,7 +49,6 @@ router.get("/allMessage1", (req, res) => {
 })
 
 
-
 // async function test() {
 
 //     const messages = await Message.findAll({
@@ -60,17 +59,13 @@ router.get("/allMessage1", (req, res) => {
 
 //     });
 
-
-
 // messages.forEach(message => {
 //     console.log(`${message.text} écrit par ${message.user.name}`)
 
 // });
 
 
-
-
-
+//Affichage message selon utilisateur
 router.get("/message/:id", (req, res) => {
     Message.findAll({
         where: {
@@ -88,9 +83,8 @@ router.get("/message/:id", (req, res) => {
 
 //Création d'un nouveau message
 router.post("/newMessage", (req, res) => {
-    console.log(req.body.text)
+    console.log(req.body)
     Message.create({
-        title: req.body.title,
         text: req.body.text,
         userId: req.body.userId
 
@@ -105,9 +99,6 @@ router.post("/newMessage", (req, res) => {
 });
 
 
-
-
-
 //supprimer un message
 router.delete("/delete/:id", (req, res) => {
     Message.destroy({
@@ -117,7 +108,7 @@ router.delete("/delete/:id", (req, res) => {
     }).then(() => res.send("success"))
         .catch(
             (error) => {
-                res.status(404).json({
+                res.status(405).json({
                     error: error
                 });
             }

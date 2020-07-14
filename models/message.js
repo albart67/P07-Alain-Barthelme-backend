@@ -10,7 +10,7 @@ const Message = sequelize.define("message", {
         primaryKey: true
     },
 
-    title: {
+    userId: {
         type: Sequelize.STRING,
         allowNull: false
     },

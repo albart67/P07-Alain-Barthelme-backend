@@ -11,6 +11,10 @@ const Comment = sequelize.define("comment", {
         primaryKey: true
     },
 
+    userId: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
 
     text: {
         type: Sequelize.STRING,

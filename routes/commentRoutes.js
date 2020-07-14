@@ -4,6 +4,24 @@ const Comment = require("../models/comment");
 const User = require("../models/user");
 
 
+//Requète afficher tout  les messages
+router.get("/allComment", (req, res) => {
+    Comment.findAll({
+        where: {
+            id: req.params.id
+        }
+    }).then(comment => res.send(comment))
+        .catch(
+            (error) => {
+                res.status(404).json({
+                    error: error
+                });
+            }
+        );
+});
+
+
+
 
 
 router.post("/newComment", (req, res) => {
